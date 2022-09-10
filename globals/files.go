@@ -15,7 +15,6 @@ const (
 	AccountFilePath         string = "storage/accounts.json"
 	ProxiesFilePath			string = "storage/proxies.txt"
 	TasksFilePath			string = "storage/tasks.json"
-	CookieFolderPath        string = "storage/cookies"
 	StorageFolderPath		string = "storage"
 )
 var (
@@ -31,7 +30,6 @@ func LoadFiles() {
 	appDataPath = adp
 	SafeCreateFolder("")
 	SafeCreateFolder(StorageFolderPath)
-	SafeCreateFolder(CookieFolderPath)
 
 	SafeCheckFile(TasksFilePath)
 	SafeCheckFile(ProxiesFilePath)

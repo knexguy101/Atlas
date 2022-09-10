@@ -1,6 +1,7 @@
 package nike
 
 import (
+	"strings"
 	"time"
 )
 
@@ -10,22 +11,24 @@ func (t *Task) login() int {
 
 	t.Delay()
 
-	err := t.page.Click("button[data-qa] > svg")
-	if err != nil {
-		return t.Error(err)
+	if !strings.Contains(t.page.URL(), "https://accounts.nike.com/lookup?") {
+		err := t.page.Click("button[data-qa] > svg")
+		if err != nil {
+			return t.Error(err)
+		}
+
+		t.Delay()
+
+		err = t.page.Click("button[data-qa='join-login-button']")
+		if err != nil {
+			return t.Error(err)
+		}
+
+		t.Delay()
 	}
 
-	t.Delay()
-
-	err = t.page.Click("button[data-qa='join-login-button']")
-	if err != nil {
-		return t.Error(err)
-	}
-
-	t.Delay()
-	//t.fakeInput()
-
-	err = t.page.Type("#username", t.Account.Email)
+	t.page.Evaluate(`document.querySelector('#username').value = ''`)
+	err := t.page.Type("#username", t.Account.Email)
 	if err != nil {
 		return t.Error(err)
 	}
@@ -37,7 +40,7 @@ func (t *Task) login() int {
 		return t.Error(err)
 	}
 
-	t.Delay()
+	time.Sleep(35 * time.Second)
 
 	err = t.page.Type("#password", t.Account.Password)
 	if err != nil {

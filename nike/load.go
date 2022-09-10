@@ -1,13 +1,22 @@
 package nike
 
-import "atlas/models/account"
+import (
+	"atlas/models/account"
+)
 
 func (t *Task) load() int {
 
 	t.setStatus("loading in")
 
-	tempAcc, err := account.Load(t.Account.Email)
-	if err == nil {
+	var (
+		tempAcc = &account.Account{}
+		err error
+	)
+	tempAcc, err = account.Load(t.Account.Email)
+	if err == nil && len(tempAcc.Cookies) > 0 {
+
+		t.setStatus("loading account")
+
 		t.Account = tempAcc
 
 		for _, v := range t.Account.ToNetworkCookies() {

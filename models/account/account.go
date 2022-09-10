@@ -1,12 +1,11 @@
 package account
 
 import (
+	"atlas/globals"
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"github.com/playwright-community/playwright-go"
-	"log"
-	"os"
 	"path"
 )
 
@@ -25,8 +24,8 @@ type fileCookie struct {
 }
 
 func Load(email string) (*Account, error) {
-	filePath := path.Join("accounts", fmt.Sprintf("%x.txt", md5.Sum([]byte(email))))
-	d, err := os.ReadFile(filePath)
+	filePath := path.Join("cookies", fmt.Sprintf("%x.txt", md5.Sum([]byte(email))))
+	d, err := globals.SafeReadFile(filePath)
 	if err != nil {
 		return nil, err
 	}
@@ -51,15 +50,12 @@ func (a *Account) ToNetworkCookies() []playwright.BrowserContextAddCookiesOption
 
 func (a *Account) Save(cookies []*playwright.BrowserContextCookiesResult) error {
 
-	a.createFolder("accounts")
+	a.createFolder("cookies")
 
-	filePath := path.Join("accounts", fmt.Sprintf("%x.txt", md5.Sum([]byte(a.Email))))
-	if _, err := os.Stat(filePath); err != nil {
-		f, err := os.Create(filePath)
-		if err != nil {
-			return err
-		}
-		f.Close()
+	filePath := path.Join("cookies", fmt.Sprintf("%x.txt", md5.Sum([]byte(a.Email))))
+	_, err := globals.SafeCreateFile(filePath)
+	if err != nil {
+		return err
 	}
 
 	fa := Account{
@@ -80,14 +76,9 @@ func (a *Account) Save(cookies []*playwright.BrowserContextCookiesResult) error 
 		return err
 	}
 
-	return os.WriteFile(filePath, d, 0777)
+	return globals.SafeWriteFile(filePath, d)
 }
 
 func (a *Account) createFolder(folder string) {
-	if _, err := os.Stat(folder); os.IsNotExist(err) {
-		mer := os.Mkdir(folder, os.ModePerm)
-		if mer != nil {
-			log.Println(mer.Error())
-		}
-	}
+	globals.SafeCreateFolder(folder)
 }

@@ -22,6 +22,8 @@ func (t *Task) submit() int {
 	e, err := frame.Locator(`button:has-text("Order")`)
 	if err != nil {
 		return t.Error(err)
+	} else if vis, err := e.IsVisible(); err != nil || !vis {
+		return t.Error(err)
 	}
 	e.Click()
 

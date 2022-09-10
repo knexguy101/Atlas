@@ -53,13 +53,10 @@
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-5 text-start my-auto">
+                                    <div class="col-8 text-start my-auto text-truncate">
                                         <h6>{{ value.email }}</h6>
                                     </div>
-                                    <div class="col-5 text-start my-auto">
-                                        <h6 type="password">{{ value.password }}</h6>
-                                    </div>
-                                    <div class="col-2 text-start">
+                                    <div class="col-4 text-end">
                                         <button class="btn btn-primary" @click="deleteAccount(value.id)"><BIconTrash /></button>
                                     </div>
                                 </div>
