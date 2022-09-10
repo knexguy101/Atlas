@@ -1,10 +1,12 @@
 package nike
 
+import "atlas/models/account"
+
 func (t *Task) load() int {
 
 	t.setStatus("loading in")
 
-	tempAcc, err := loadAccount(t.Account.Email)
+	tempAcc, err := account.Load(t.Account.Email)
 	if err == nil {
 		t.Account = tempAcc
 

@@ -1,4 +1,4 @@
-package nike
+package size
 
 import (
 	"errors"
@@ -12,7 +12,7 @@ import (
 	Using a BaseValue int vs just the raw string itself to make converting between sizes easier.
 	If we swap the region, it auto swaps without a lot of weird conversion.
 	Downside to this being user input must follow this non-standard format, but eh, that's for future me to figure out.
- */
+*/
 
 type Size struct {
 	BaseValue float64

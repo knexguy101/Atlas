@@ -4,6 +4,9 @@
     export default {
         components: {
             Navbar
+        },
+        mounted() {
+            window.appLoaded()
         }
     }
 </script>

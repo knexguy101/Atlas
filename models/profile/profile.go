@@ -1,6 +1,8 @@
-package nike
+package profile
 
 type Profile struct {
+	ID string `json:"id"`
+	Title string `json:"title"`
 	Shipping ProfileInfo `json:"shipping"`
 	Billing ProfileInfo `json:"billing"`
 	Payment ProfilePayment `json:"payment"`

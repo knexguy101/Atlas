@@ -1,4 +1,4 @@
-package nike
+package account
 
 import (
 	"crypto/md5"
@@ -10,15 +10,8 @@ import (
 	"path"
 )
 
-/*
-	Account
-
-	Stores the email, pass, and cookies whenever a task successfully logs into an account.
-	Also helps with formatting to the weird standards of browser library cookies
-	I don't need to store HttpOnly and other cookie attributes since it doesn't really apply with Nike
- */
-
 type Account struct {
+	ID string `json:"id"`
 	Email string `json:"email"`
 	Password string `json:"password"`
 	Cookies []fileCookie `json:"cookies"`
@@ -31,7 +24,7 @@ type fileCookie struct {
 	Path string `json:"path"`
 }
 
-func loadAccount(email string) (*Account, error) {
+func Load(email string) (*Account, error) {
 	filePath := path.Join("accounts", fmt.Sprintf("%x.txt", md5.Sum([]byte(email))))
 	d, err := os.ReadFile(filePath)
 	if err != nil {

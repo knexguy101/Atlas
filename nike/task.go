@@ -1,29 +1,31 @@
 package nike
 
 import (
+	"atlas/models/account"
+	"atlas/models/profile"
+	"atlas/models/size"
+	"atlas/models/task"
 	"context"
+	"fmt"
 	"github.com/playwright-community/playwright-go"
+	"github.com/zserge/lorca"
 	"log"
 	"math/rand"
 	"time"
 )
 
 type Task struct {
-	ID string
-	SKU string
-	Size *Size
+	*task.Task
+	Account *account.Account
+	Profile *profile.Profile
+	Size *size.Size
 	Proxy []string
-	Account *Account
-	Profile *Profile
-	PW *playwright.Playwright
-	IsProfileTask bool
-	StartTime int64
-	MonitorRelease bool
 
 	state int
-	status string
 	running bool
 
+	UI lorca.UI
+	PW *playwright.Playwright
 	browser playwright.Browser
 	page playwright.Page
 	ctx context.Context
@@ -31,8 +33,12 @@ type Task struct {
 }
 
 func (t *Task) setStatus(s string) {
-	log.Println(s)
-	t.status = s
+	fmt.Println(t.ID, s)
+	t.UI.Eval(fmt.Sprintf(`window.store.commit("setTaskStatus", {
+		"id": "%s",
+		"msg": "%s"
+	})`, t.ID, s))
+	t.Status = s
 }
 
 func (t *Task) Start() {
