@@ -12,6 +12,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"github.com/playwright-community/playwright-go"
+	"github.com/gofiber/fiber/v2"
 	"github.com/zserge/lorca"
 	"os"
 	"strings"
@@ -225,11 +226,20 @@ func main() {
 		return true
 	})
 
-	if os.Getenv("DEV") == "true" {
-		ui.Load(fmt.Sprintf("http://127.0.0.1:5173"))
-	} else {
+	if os.Getenv("DEV") != "true" {
+		go func() {
+			app := fiber.New()
 
+			app.All("/assets/*.js", func(ctx *fiber.Ctx) error {
+				ctx.Set(fiber.HeaderContentType, "application/javascript")
+				return ctx.Next()
+			})
+			app.Static("/", "./ui/dist")
+
+			app.Listen(":59171")
+		}()
 	}
+	ui.Load(fmt.Sprintf("http://127.0.0.1:59171"))
 
 	// Wait for the browser window to be closed
 	<-ui.Done()
