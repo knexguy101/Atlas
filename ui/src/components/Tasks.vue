@@ -40,13 +40,16 @@ import { BIconPlay, BIconStop, BIconTrash } from 'bootstrap-icons-vue'
             <div class="card-body">
                 <div class="container">
                     <div class="row">
+                        <div class="col-1 text-truncate text-start my-auto">
+                            <h5 class="text-primary">{{ (value.isProfileTask ? "Profile" : "SNKRS") }}</h5>
+                        </div>
                         <div class="col-2 text-truncate text-start my-auto">
-                            <h5 class="text-primary">{{ value.sku }}</h5>
+                            <h5 class="text-secondary">{{ value.sku }}</h5>
                         </div>
                         <div class="col-3 text-truncate my-auto">
                             <h6>{{value.accountEmail}}</h6>
                         </div>
-                        <div class="col-4 text-truncate my-auto">
+                        <div class="col-3 text-truncate my-auto">
                             <h6>{{value.status}}</h6>
                         </div>
                         <div class="col-3 text-end">

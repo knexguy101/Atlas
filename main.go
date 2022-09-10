@@ -13,6 +13,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/playwright-community/playwright-go"
 	"github.com/zserge/lorca"
+	"os"
 	"strings"
 )
 
@@ -224,7 +225,11 @@ func main() {
 		return true
 	})
 
-	ui.Load(fmt.Sprintf("http://127.0.0.1:5173"))
+	if os.Getenv("DEV") == "true" {
+		ui.Load(fmt.Sprintf("http://127.0.0.1:5173"))
+	} else {
+
+	}
 
 	// Wait for the browser window to be closed
 	<-ui.Done()

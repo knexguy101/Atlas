@@ -16,12 +16,17 @@ func (t *Task) payment() int {
 	t.Delay()
 
 	//remove old payment
-	t.page.Click("div[class='Default-payment'] > div > div > button")
-	time.Sleep(2 * time.Second)
-	t.page.Click("div[data-testid='dialog-actions'] > div > div > button:nth-child(2)")
-	time.Sleep(750 * time.Millisecond)
-	t.page.Click(".mex-address-delete-button")
-	time.Sleep(750 * time.Millisecond)
+	l, err := t.page.Locator("div[class='Default-payment'] > div > div > button")
+	if err != nil {
+		return t.Error(err)
+	} else if vis, _ := l.IsVisible(); vis {
+		t.page.Click("div[class='Default-payment'] > div > div > button")
+		time.Sleep(2 * time.Second)
+		t.page.Click("div[data-testid='dialog-actions'] > div > div > button:nth-child(2)")
+		time.Sleep(750 * time.Millisecond)
+		t.page.Click(".mex-address-delete-button")
+		time.Sleep(750 * time.Millisecond)
+	}
 
 	t.page.WaitForSelector(".mex-add-new-payment-container > div > button[type='submit']")
 	t.page.Click(".mex-add-new-payment-container > div > button[type='submit']")
@@ -37,7 +42,7 @@ func (t *Task) payment() int {
 	time.Sleep(time.Millisecond * 1373)
 
 	paymentFrame.Click("#expirationDate")
-	t.page.Keyboard().Type(fmt.Sprintf(fixMonth(t.Profile.Payment.Month) + t.Profile.Payment.Year[2:]), playwright.KeyboardTypeOptions{Delay: playwright.Float(147)})
+	t.page.Keyboard().Type(fmt.Sprintf(fixMonth(t.Profile.Payment.Month) + t.Profile.Payment.Year), playwright.KeyboardTypeOptions{Delay: playwright.Float(147)})
 	time.Sleep(time.Millisecond * 1073)
 
 	paymentFrame.Click("#cvNumber")
@@ -95,7 +100,7 @@ func (t *Task) payment() int {
 	time.Sleep(time.Millisecond * 774)
 
 	t.page.Click("div[aria-labelledby='dialog-add-payment-method'] > section > div:nth-child(2) > div > div > button")
-	t.Delay()
+	time.Sleep(10 * time.Second)
 
 	return FINISHED
 }

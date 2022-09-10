@@ -20,6 +20,14 @@ func (t *Task) address() int {
 		return t.Error(err)
 	}
 
+	t.Delay()
+	l, err := t.page.Locator("button:has-text('Continue')")
+	if err != nil {
+		return t.Error(err)
+	} else if val, _ := l.IsVisible(); val {
+		l.Click()
+	}
+
 	//remove old payment
 	t.page.Click("button[data-testid='edit-button']")
 	time.Sleep(2 * time.Second)
@@ -72,6 +80,7 @@ func (t *Task) address() int {
 	time.Sleep(time.Millisecond * 300)
 
 	t.page.Click(`#phone`)
+	time.Sleep(time.Millisecond * 300)
 	t.page.Keyboard().Type(t.Profile.Shipping.Phone, playwright.KeyboardTypeOptions{Delay: playwright.Float(147)})
 	time.Sleep(time.Millisecond * 300)
 
@@ -80,6 +89,15 @@ func (t *Task) address() int {
 
 	t.page.Click("button[data-testid='submit-button']")
 	t.Delay()
+
+	//div You Entered
+	e, err := t.page.Locator("div[data-testid='entered-address']")
+	if err != nil {
+		return t.Error(err)
+	} else if val, _ := e.IsVisible(); val {
+		e.Click()
+		time.Sleep(time.Millisecond * 774)
+	}
 
 	t.page.Click("button[data-testid='submit-button']")
 	t.Delay()

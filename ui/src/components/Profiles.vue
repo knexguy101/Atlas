@@ -153,13 +153,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">City</span>
                                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="currentProfile.shipping.city">
                             </div>
                         </div>
                         <div class="col-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon3">Phone</span>
+                                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="currentProfile.shipping.phone">
+                            </div>
+                        </div>
+                        <div class="col-2">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">State</span>
                                 <select class="form-select" aria-label="Default select example" v-model="currentProfile.shipping.province">
@@ -227,13 +233,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">City</span>
                                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="currentProfile.billing.city">
                             </div>
                         </div>
                         <div class="col-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon3">Phone</span>
+                                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="currentProfile.billing.phone">
+                            </div>
+                        </div>
+                        <div class="col-2">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon3">State</span>
                                 <select class="form-select" aria-label="Default select example" v-model="currentProfile.billing.province">
