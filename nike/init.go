@@ -5,6 +5,13 @@ import (
 	"github.com/playwright-community/playwright-go"
 )
 
+/*
+	Init
+
+	Loads the browser and page with the given proxy.
+	We also set the viewport size to something arbitrary, would move to maybe randomize this eventually?
+ */
+
 func (t *Task) init() int {
 	t.setStatus("Initializing task")
 

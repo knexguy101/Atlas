@@ -7,14 +7,16 @@ import (
 	"atlas/models/size"
 	"atlas/models/task"
 	"atlas/nike"
+	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"github.com/playwright-community/playwright-go"
-	"github.com/gofiber/fiber/v2"
 	"github.com/zserge/lorca"
 	"os"
+	"path"
 	"strings"
 )
 
@@ -120,6 +122,11 @@ func main() {
 	})
 	ui.Bind("deleteAccount", func(id string) bool {
 		accList.Remove(id)
+		return true
+	})
+	ui.Bind("deleteCookies", func(email string) bool {
+		filePath := path.Join("cookies", fmt.Sprintf("%x.txt", md5.Sum([]byte(email))))
+		globals.SafeDeleteFile(filePath)
 		return true
 	})
 
@@ -236,10 +243,10 @@ func main() {
 			})
 			app.Static("/", "./ui/dist")
 
-			app.Listen(":59171")
+			app.Listen(":5173")
 		}()
 	}
-	ui.Load(fmt.Sprintf("http://127.0.0.1:59171"))
+	ui.Load(fmt.Sprintf("http://127.0.0.1:5173"))
 
 	// Wait for the browser window to be closed
 	<-ui.Done()

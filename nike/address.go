@@ -5,6 +5,12 @@ import (
 	"time"
 )
 
+/*
+	Address
+
+	Attempts to fill in the address information of the account with the given profile
+ */
+
 func (t *Task) address() int {
 	t.setStatus("adding address")
 
@@ -19,8 +25,9 @@ func (t *Task) address() int {
 	if err != nil {
 		return t.Error(err)
 	}
-
 	t.Delay()
+
+	//Popup handling
 	l, err := t.page.Locator("button:has-text('Continue')")
 	if err != nil {
 		return t.Error(err)
@@ -91,6 +98,7 @@ func (t *Task) address() int {
 	t.Delay()
 
 	//div You Entered
+	//this handles the address suggestion, picks the original address
 	e, err := t.page.Locator("div[data-testid='entered-address']")
 	if err != nil {
 		return t.Error(err)

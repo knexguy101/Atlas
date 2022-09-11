@@ -6,6 +6,14 @@ import (
 	"time"
 )
 
+/*
+	Cart
+
+	Monitors the release page or sleeps for the given time.
+	It then selects the given size and the buy button
+	Then it waits for the checkout pop up.
+ */
+
 func (t *Task) cart() int {
 
 	_, err := t.page.Goto(fmt.Sprintf("https://www.nike.com/launch/r/%s", t.SKU))
@@ -57,7 +65,6 @@ func (t *Task) cart() int {
 	if err != nil {
 		return t.Error(err)
 	}
-	fmt.Println(sizeText)
 
 	res, err := t.page.Locator(fmt.Sprintf(`button:has-text("M %s")`, sizeText))
 	if err != nil {

@@ -1,5 +1,5 @@
 <script>
-    import { BIconTrash } from 'bootstrap-icons-vue'
+    import { BIconTrash, BIconXCircle } from 'bootstrap-icons-vue'
 
     export default {
         data() {
@@ -8,6 +8,7 @@
             }
         },
         components: {
+            BIconXCircle,
             BIconTrash
         },
         methods: {
@@ -28,6 +29,12 @@
                 }
 
                 this.$store.commit("removeAccount", id)
+            },
+            async deleteCookies(email) {
+                var res = await window.deleteCookies(email)
+                if(!res) {
+                    return 
+                }
             }
         }
     }
@@ -57,7 +64,8 @@
                                         <h6>{{ value.email }}</h6>
                                     </div>
                                     <div class="col-4 text-end">
-                                        <button class="btn btn-primary" @click="deleteAccount(value.id)"><BIconTrash /></button>
+                                        <button class="btn btn-primary" @click="deleteCookies(value.email)"><BIconTrash /></button>
+                                        <button class="btn btn-danger mx-1" @click="deleteAccount(value.id)"><BIconXCircle /></button>
                                     </div>
                                 </div>
                             </div>

@@ -4,6 +4,13 @@ import (
 	"atlas/models/account"
 )
 
+/*
+	Load
+
+	loads cookies, if possible, into the browser.
+	if no cookies exist, it moves to log in, otherwise it moves to either cart or address
+ */
+
 func (t *Task) load() int {
 
 	t.setStatus("loading in")
