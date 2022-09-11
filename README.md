@@ -35,8 +35,18 @@ npm run build
 ```
 
 ## Preview
-<img width="100%" src="https://i.gyazo.com/cd00261e72b13014a3dc3c9050306d7c.png"> 
-<img width="100%" src="https://i.gyazo.com/f912c31407d6fb27707e48013a8e8e2b.png"> 
-<img width="100%" src="https://i.gyazo.com/896e7c4156d3186330472da7b5689678.png"> 
-<img width="100%" src="https://i.gyazo.com/14aa4f8ba2590227356e67be0a93e08e.png"> 
-<img width="100%" src="https://i.gyazo.com/a84fff031e6bc073213adee190f3c031.png"> 
+<p align="center" width="100%">
+    <img width="85%" src="https://i.gyazo.com/cd00261e72b13014a3dc3c9050306d7c.png"> 
+</p>
+<p align="center" width="100%">
+    <img width="85%" src="https://i.gyazo.com/f912c31407d6fb27707e48013a8e8e2b.png"> 
+</p>
+<p align="center" width="100%">
+    <img width="85%" src="https://i.gyazo.com/896e7c4156d3186330472da7b5689678.png"> 
+</p>
+<p align="center" width="100%">
+    <img width="85%" src="https://i.gyazo.com/14aa4f8ba2590227356e67be0a93e08e.png"> 
+</p>
+<p align="center" width="100%">
+    <img width="85%" src="https://i.gyazo.com/a84fff031e6bc073213adee190f3c031.png"> 
+</p>
