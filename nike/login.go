@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+/*
+	Login
+
+	Attempts to log into the account.
+	Very buggy handling for the kasada 30-second pop countdown pop up was added but not very well tested
+ */
+
 func (t *Task) login() int {
 
 	t.setStatus("logging in")

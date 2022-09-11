@@ -6,6 +6,13 @@ import (
 	"time"
 )
 
+/*
+	Payment
+
+	Fills out the payment information
+	It also removes the old payment by default.
+ */
+
 func (t *Task) payment() int {
 	t.setStatus("adding payment")
 

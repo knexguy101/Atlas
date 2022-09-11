@@ -1,5 +1,13 @@
 package nike
 
+/*
+	Pending
+
+	Checks the page for the pending status.
+	Also does not have complete handling for Sold Out button, as well as the Already Purchased status.
+
+ */
+
 func (t *Task) pending() int {
 	t.setStatus("Monitoring for win")
 

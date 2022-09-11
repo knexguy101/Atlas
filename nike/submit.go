@@ -4,6 +4,13 @@ import (
 	"time"
 )
 
+/*
+	Submit
+
+	Submits the checkout pop up.
+	No idea if this will work, or if locator/click will work within the frame correctly
+ */
+
 func (t *Task) submit() int {
 	t.setStatus("Submitting checkout modal")
 
