@@ -2,6 +2,8 @@
 .env
 accounts/
 atlas.exe
+release/
+release.zip
 
 # Logs
 ui/logs
